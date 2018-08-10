@@ -6,6 +6,8 @@ import net.fabricmc.installer.util.IInstallerProgress;
 import net.fabricmc.installer.util.Reference;
 import net.fabricmc.installer.util.Translator;
 import net.fabricmc.installer.util.VersionInfo;
+import org.apache.commons.lang3.JavaVersion;
+import org.apache.commons.lang3.SystemUtils;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.xml.sax.SAXException;
 
@@ -23,12 +25,10 @@ public class Main {
 		throws ParserConfigurationException, XmlPullParserException, SAXException, IOException, ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException,
 		IllegalAccessException {
 
-		String[] versionSplit = System.getProperty("java.version").split("\\.");
-		int jVersion = Integer.parseInt(versionSplit[1]);
-		if (jVersion < 8) {
-			System.out.println("You are on an old version of java, fabric will not work! Please update to java 8 or newer to use fabric.");
+		if (!SystemUtils.isJavaVersionAtLeast(JavaVersion.JAVA_1_8)) {
+			System.out.println("You are on an old version of java, fabric will not work! Please update to java 8 or newer to use oml");
 			if (args.length == 0 || !args[0].equals("nogui")) {
-				JOptionPane.showMessageDialog(null, "You are using an outdated version of java, fabric will not work! \n Please update to java 8 or newer to use fabric.", "Java Version Warning", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "You are using an outdated version of java, fabric will not work! \n Please update to java 8 or newer to use oml", "Java Version Warning", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 
@@ -39,7 +39,7 @@ public class Main {
 
 		Translator.load(locale);
 
-		System.out.println(Translator.getString("fabric.installer.load") + ":" + Reference.VERSION);
+		System.out.println(Translator.getString("oml.installer.load") + ":" + Reference.VERSION);
 
 		//Used to suppress warning from libs
 		setDebugLevel(Level.SEVERE);

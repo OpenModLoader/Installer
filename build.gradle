@@ -67,7 +67,7 @@ tasks.compileJava.setSource(project.getBuildDir().toString() + '/sources/java')
 
 jar {
     manifest {
-        attributes 'Implementation-Title': 'FabricInstaller',
+        attributes 'Implementation-Title': 'OpenModLoaderInstaller',
                 'Implementation-Version': version,
                 'Main-Class': 'net.fabricmc.installer.Main'
     }

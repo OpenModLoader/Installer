@@ -60,7 +60,9 @@ public class MainGui extends JFrame implements IInstallerProgress {
 			versionComboBox.addItem(str);
 		}
 		versionComboBox.setSelectedIndex(0);
+		clientRadioButton.setEnabled(true);
 		clientRadioButton.setSelected(true);
+		multimcRadioButton.setSelected(true);
 		progressBar.setMaximum(100);
 
 		String home = System.getProperty("user.home", ".");
@@ -190,7 +192,7 @@ public class MainGui extends JFrame implements IInstallerProgress {
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		MainGui dialog = new MainGui();
 		dialog.pack();
-		dialog.setTitle(Translator.getString("fabric.installer.name"));
+		dialog.setTitle(Translator.getString("oml.installer.name"));
 		dialog.setLocationRelativeTo(null);
 		dialog.setVisible(true);
 	}
@@ -213,7 +215,7 @@ public class MainGui extends JFrame implements IInstallerProgress {
 		panel3.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
 		contentPane.add(panel3, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
 		final JLabel label1 = new JLabel();
-		label1.setText(Translator.getString("fabric.installer.name"));
+		label1.setText(Translator.getString("oml.installer.name"));
 		panel3.add(label1, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		final JLabel label2 = new JLabel();
 		label2.setText(Translator.getString("gui.selectSide"));

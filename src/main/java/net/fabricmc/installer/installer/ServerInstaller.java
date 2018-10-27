@@ -1,5 +1,8 @@
 package net.fabricmc.installer.installer;
 
+import com.openmodloader.util.Version;
+import com.openmodloader.util.VersionSpec;
+import net.fabricmc.installer.Main;
 import net.fabricmc.installer.util.IInstallerProgress;
 import net.fabricmc.installer.util.Translator;
 import org.apache.commons.io.FileUtils;
@@ -17,13 +20,13 @@ public class ServerInstaller {
 
 
 	public static void install(File mcDir, String version, IInstallerProgress progress) throws IOException {
-		File fabricJar = new File(mcDir, "fabric-" + version + ".jar");
+		File fabricJar = new File(mcDir, "OpenModLoader-" + version + ".jar");
 		if (fabricJar.exists()) {
 			fabricJar.delete();
 		}
 
-		progress.updateProgress(Translator.getString("install.server.downloadFabric"), 5);
-		FileUtils.copyURLToFile(new URL("http://maven.fabricmc.net/net/fabricmc/fabric-base/" + version + "/fabric-base-" + version + ".jar"), fabricJar);
+		progress.updateProgress(Translator.getString("install.server.downloadOML"), 5);
+		FileUtils.copyURLToFile(new URL("http://maven.modmuss50.me/com/openmodloader/OpenModLoader/" + version + "/OpenModLoader-" + version + ".jar"), fabricJar);
 		install(mcDir, version, progress, fabricJar);
 	}
 
@@ -31,13 +34,28 @@ public class ServerInstaller {
 		progress.updateProgress(Translator.getString("gui.installing") + ": " + version, 0);
 		String[] split = version.split("-");
 		String mcVer = split[0];
-		String fabricVer = split[1];
 
 		File mcJar = new File(mcDir, "minecraft_server." + mcVer + ".jar");
 
 		if(!mcJar.exists()){
 			progress.updateProgress(Translator.getString("install.server.downloadServer"), 10);
-			FileUtils.copyURLToFile(new URL("https://s3.amazonaws.com/Minecraft.Download/versions/" + mcVer + "/minecraft_server." + mcVer + ".jar"), mcJar);
+
+			VersionSpec spec = null;
+
+			for(Version v : Main.LAUNCH_META.getVersions()) {
+				if(v.getId().equals(mcVer)) {
+					String url = v.getUrl();
+					String json = Main.readUrl(url);
+					spec=Main.GSON.fromJson(json, VersionSpec.class);
+					break;
+				}
+			}
+			if(spec==null) {
+				progress.error(Translator.getString("install.server.failedVSpec"));
+				return;
+			}
+
+			FileUtils.copyURLToFile(new URL(spec.getDownloads().getServer().getUrl()), mcJar);
 		}
 
 		File libs = new File(mcDir, "libs");

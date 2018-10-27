@@ -27,7 +27,7 @@ repositories {
     mavenCentral()
     maven {
         name = 'fabric'
-        url = 'http://maven.fabricmc.net/'
+        url = 'http://maven.modmuss50.me/'
     }
     maven {
         name = 'cuchaz'

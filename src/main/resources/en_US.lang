@@ -44,6 +44,7 @@ install.server.exportMappedJar=Exporting Mapped Jar file
 install.server.extractLibs=Extracting Library's
 install.server.downloadLibs=Downloading Library's
 install.server.packJar=Packing Jar Files
+install.server.failedVSpec=Failed to get Version Spec
 
 #MultiMC installer progress
 install.multimc.local=Installing a local file into MultiMC isn't supported.
@@ -56,7 +57,7 @@ install.multimc.installingInto=Installing OML into [NAME]
 install.multimc.createJson=Creating patches.json
 
 #General install Texts
-install.success=Done!
+install.success=Install Successful!
 
 #CLI help text
 cli.help.title=OpenModLoader installer help

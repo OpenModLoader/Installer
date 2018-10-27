@@ -67,7 +67,13 @@ public class ClientInstaller {
 		jsonObject.addProperty("releaseTime", "2016-10-13T15:20:52+01:00");
 		jsonObject.addProperty("mainClass", "cpw.mods.modlauncher.Launcher");
 		String args = "--username ${auth_player_name} --version ${version_name} --gameDir ${game_directory} --assetsDir ${assets_root} --assetIndex ${assets_index_name} --uuid ${auth_uuid} --accessToken ${auth_access_token} --userType ${user_type} --launchTarget oml";
-		jsonObject.addProperty("minecraftArguments", args);
+		//jsonObject.addProperty("minecraftArguments", args);
+		JsonObject game = new JsonObject();
+		JsonArray arguments = new JsonArray();
+		game.add("arguments", arguments);
+		arguments.add("--launchTarget");
+		arguments.add("omlclient");
+		jsonObject.add("game", game);
 		jsonObject.addProperty("inheritsFrom", mcVersion);
 		jsonObject.addProperty("jar", mcVersion);
 

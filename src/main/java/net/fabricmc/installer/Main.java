@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.logging.*;
 
@@ -55,7 +56,7 @@ public class Main {
 		IllegalAccessException {
 
 		if (!SystemUtils.isJavaVersionAtLeast(JavaVersion.JAVA_1_8)) {
-			System.out.println("You are on an old version of java, fabric will not work! Please update to java 8 or newer to use oml");
+			System.out.println("You are on an old version of java, OpenModLoader will not work! Please update to java 8 or newer to use OML");
 			if (args.length == 0 || !args[0].equals("nogui")) {
 				JOptionPane.showMessageDialog(null, "You are using an outdated version of java, fabric will not work! \n Please update to java 8 or newer to use oml", "Java Version Warning", JOptionPane.ERROR_MESSAGE);
 			}
@@ -82,7 +83,7 @@ public class Main {
 			System.out.println(Translator.getString("cli.help.noArgs"));
 			System.out.println(Translator.getString("cli.help.nogui"));
 		} else if (args[0].equals("nogui")) {
-			System.out.println("Fabric Server cli installer");
+			System.out.println("OpenModLoader Server cli installer");
 			System.out.println("Loading available versions for install");
 			VersionInfo.load();
 			File runDir = new File(".");
@@ -96,7 +97,7 @@ public class Main {
 					return;
 				}
 			}
-			if (runDir.listFiles().length != 0) {
+			if (Objects.requireNonNull(runDir.listFiles()).length != 0) {
 				if (!getUserInput("The current select install location is not empty, are you sure you want to install here? (Y/n)").equals("Y")) {
 					return;
 				}

@@ -1,2 +1,2 @@
-# fabric-installer
-An Installer for Fabric
+# OpenModLoader Installer
+An Installer for OpenModLoader

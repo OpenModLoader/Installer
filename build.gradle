@@ -59,10 +59,10 @@ task copyAndReplace(type: Copy) {
     from(sourceSets.main.java) {
         exclude '**/Reference.java'
     }
-    into project.getBuildDir().toString() + "/sources/java"
+    into project.buildDir.toString() + "/sources/java"
 }
 tasks.compileJava.dependsOn copyAndReplace
-tasks.compileJava.setSource(project.getBuildDir().toString() + '/sources/java')
+tasks.compileJava.setSource(project.buildDir.toString() + '/sources/java')
 
 
 jar {
